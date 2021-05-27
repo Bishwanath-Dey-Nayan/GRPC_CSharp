@@ -4,6 +4,11 @@ option csharp_namespace = "GrpcServer";
 
 service Student{
 	rpc GetStudentInfo(StudentLookupModel) returns (StudentModel);
+	rpc GetStudents (NewStudentRequest) returns (stream StudentModel);
+}
+
+message NewStudentRequest{
+
 }
 
 message StudentLookupModel{

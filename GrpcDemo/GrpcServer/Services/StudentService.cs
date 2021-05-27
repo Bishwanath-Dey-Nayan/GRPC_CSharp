@@ -32,5 +32,40 @@ namespace GrpcServer.Services
 
             return Task.FromResult(output);
         }
+        public override async Task GetStudents(NewStudentRequest request, IServerStreamWriter<StudentModel> responseStream, ServerCallContext context)
+        {
+            List<StudentModel> students = new List<StudentModel>
+            {
+                new StudentModel
+                {
+                    FirstName = "Nayan",
+                    LastName = "Dey",
+                    EmailAddress = "nayandey07@gmail.com",
+                    Age = 25,
+                    IsAlive = true
+                },
+                 new StudentModel
+                {
+                    FirstName = "Rahim",
+                    LastName = "Mia",
+                    EmailAddress = "rahim@gmail.com",
+                    Age = 26,
+                    IsAlive = true
+                },
+                                  new StudentModel
+                {
+                    FirstName = "Karim",
+                    LastName = "Mia",
+                    EmailAddress = "karim@gmail.com",
+                    Age = 27,
+                    IsAlive = true
+                },
+            };
+
+            foreach(var stu in students)
+            {
+               await responseStream.WriteAsync(stu);
+            }
+        }
     }
 }
